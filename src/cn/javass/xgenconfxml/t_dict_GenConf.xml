@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ModuleGenConf id="t_dict_GenConf">
+	<NeedGenTypes>
+		<NeedGenType id="GenDaoDao">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		<NeedGenType id="GenDaoMapper">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenService">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenServiceImpl">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenWebController">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenListPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+		<NeedGenType id="GenAddPage">
+			<NeedGenOutType id="File"></NeedGenOutType>
+		</NeedGenType>
+		
+	</NeedGenTypes>
+	
+	<ExtendConfs>
+		<!--***************************** 基本设置 ***************************** -->
+		<ExtendConf id="codeOutPath" isSingle="true">build</ExtendConf>
+		<ExtendConf id="commonPackge" isSingle="true">com.lee</ExtendConf>
+		<ExtendConf id="modulePackge" isSingle="true">exp</ExtendConf>
+		
+		<!--***************************** 模块信息 ***************************** -->
+		<ExtendConf id="moduleName" isSingle="true">dict</ExtendConf>
+		<ExtendConf id="moduleNameSuperCase" isSingle="true">Dict</ExtendConf>
+		<ExtendConf id="moduleName_CN" isSingle="true">数据字典</ExtendConf>
+		
+		<!--***************************** 数据库相关 ***************************** -->
+		<!-- 数据库查询条件 -->
+		<ExtendConf id="tblName" isSingle="true">t_dict</ExtendConf>
+		<ExtendConf id="cols" isSingle="false">dict_key,dict_value,description,sort,remarks,create_by,create_time,delete_flag,parent_id</ExtendConf>
+		<ExtendConf id="selectParams" isSingle="false">dict_key,dict_value,description,sort,remarks,create_by,create_time,delete_flag,parent_id</ExtendConf>
+		
+		<!--***************************** 页面相关 ***************************** -->
+		<!-- 页面查询条件 -->
+		<ExtendConf id="queryFields" isSingle="false">dict_key,parent_id</ExtendConf>
+		<ExtendConf id="queryFields_CN" isSingle="false">KEY,父级编号</ExtendConf>
+		<!-- 显示列表字段-->
+		<ExtendConf id="showFields" isSingle="false">parent_id,dict_key,dict_value,description,sort,remarks,create_time</ExtendConf>
+		<ExtendConf id="showFields_CN" isSingle="false">父级编号,键,值,描叙,排序,备注,创建时间</ExtendConf>
+		<!-- 添加/编辑的字段 -->
+		<ExtendConf id="addFields" isSingle="false">dict_key,dict_value,description,parent_id,sort,remarks</ExtendConf>
+		<ExtendConf id="addFields_CN" isSingle="false">键,值,描叙,父级编号,排序,备注</ExtendConf>
+		
+	</ExtendConfs>
+</ModuleGenConf>

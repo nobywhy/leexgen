@@ -1,0 +1,31 @@
+package $#commonPackge#.$#modulePackge#.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import $#commonPackge#.common.dao.BaseDAO;
+import $#commonPackge#.common.service.BaseServiceImpl;
+import $#commonPackge#.$#modulePackge#.dao.$#moduleNameSuperCase#Dao;
+import $#commonPackge#.$#modulePackge#.service.$#moduleNameSuperCase#Service;
+
+@Service
+public class $#moduleNameSuperCase#ServiceImpl extends BaseServiceImpl implements $#moduleNameSuperCase#Service {
+	@Autowired
+	private $#moduleNameSuperCase#Dao dao = null;
+
+	@Override
+	@Resource(name="$#moduleName#Dao")
+	public void setDAO(BaseDAO dao) {
+		super.setDAO(dao);
+	}
+
+
+}

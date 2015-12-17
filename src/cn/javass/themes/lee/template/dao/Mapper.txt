@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="$#commonPackge#.$#modulePackge#.dao.$#moduleNameSuperCase#Dao">
+
+
+	<insert id="create" parameterType="java.util.HashMap">
+			insert into
+			$#tblName#($#cols#)
+			values
+			 ($[cn.javass.themes.lee.visitors.InsertIntoValues])
+	</insert>
+
+	<update id="update" parameterType="java.util.HashMap">
+			update $#tblName#
+			<set>
+				$[cn.javass.themes.lee.visitors.UpdateSetSql]
+			</set>
+			where id=#{id}
+	</update>
+
+	<delete id="delete" parameterType="int">
+			delete from $#tblName# where
+			id=#{id}
+	</delete>
+
+	<select id="getById" resultType="java.util.HashMap">
+			select * from $#tblName# where
+			id=#{id}
+	</select>
+
+	<select id="getByConditionCount" parameterType="java.util.HashMap"
+		resultType="int">
+			select count(*) from $#tblName#
+			<where>
+				$[cn.javass.themes.lee.visitors.SelectParamSql]
+			</where>
+	</select>
+
+	<select id="getByConditionPage" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+			select * from $#tblName#
+			<where>
+				$[cn.javass.themes.lee.visitors.SelectParamSql]
+			</where>
+			order by id desc
+			limit #{first},#{pageSize}
+	</select>
+	
+	<select id="getByCondition" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+			select * from $#tblName#
+			<where>
+				$[cn.javass.themes.lee.visitors.SelectParamSql]
+			</where>
+			order by id desc
+	</select>
+
+</mapper>

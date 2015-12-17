@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GenConf>
+	<NeedGens>
+		<NeedGen id="t_dict_GenConf" provider="XmlModuleGenConf" themeId="lanhai">
+			<Params>
+				<Param id="fileName">t_dict_GenConf.xml</Param>
+			</Params>	
+		</NeedGen> 
+		
+		
+	</NeedGens>
+	<Themes>
+		<Theme id="lanhai">cn/javass/themes/lee</Theme>
+	</Themes>
+	<Constants>
+		<Constant id="prePackage">com/lee/dict</Constant>
+		<Constant id="projectName">dict</Constant>
+	</Constants>
+</GenConf>

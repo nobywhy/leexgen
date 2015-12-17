@@ -1,0 +1,11 @@
+package $#commonPackge#.$#modulePackge#.dao;
+
+import org.springframework.stereotype.Repository;
+
+import $#commonPackge#.common.dao.BaseDAO;
+
+@Repository
+public interface $#moduleNameSuperCase#Dao extends BaseDAO{
+
+	
+}
