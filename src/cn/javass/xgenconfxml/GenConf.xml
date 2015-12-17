@@ -2,6 +2,9 @@
 
 <GenConf>
 	<NeedGens>
+		
+		<!-- 根据t_dict_GenConf.xml中配置的信息生成代码 -->
+		<!-- id="t_dict_GenConf" 与 t_dict_GenConf.xml中<ModuleGenConf id="t_dict_GenConf">一致 -->
 		<NeedGen id="t_dict_GenConf" provider="XmlModuleGenConf" themeId="lanhai">
 			<Params>
 				<Param id="fileName">t_dict_GenConf.xml</Param>
