@@ -3,9 +3,14 @@ package $#commonPackge#.$#modulePackge#.dao;
 import org.springframework.stereotype.Repository;
 
 import $#commonPackge#.common.dao.BaseDAO;
-
+import $#commonPackge#.$#modulePackge#.model.$#moduleNameSuperCase#Model;
+/**
+ * 
+ * @author liwei
+ *
+ */
 @Repository
-public interface $#moduleNameSuperCase#Dao extends BaseDAO{
+public interface $#moduleNameSuperCase#Dao extends BaseDAO<$#moduleNameSuperCase#Model<String, Object>>{
 
 	
 }

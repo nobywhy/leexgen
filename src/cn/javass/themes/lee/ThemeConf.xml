@@ -2,6 +2,7 @@
 
 <Theme id="lanhai">
 	<GenTypes>
+	
 		<GenType id="GenDaoDao" type="cn.javass.themes.lee.actions.GenDaoDaoAction">
 			<Params>
 				<Param id="relativePath">dao</Param>
@@ -41,6 +42,15 @@
 			<Params>
 				<Param id="relativePath">controller</Param>
 				<Param id="mbPathFile">controller/Controller.txt</Param>
+				<Param id="preGenFileName"></Param>
+				<Param id="afterGenFileName">Controller.java</Param>
+			</Params>
+		</GenType>
+		
+		<GenType id="GenAppController" type="cn.javass.themes.lee.actions.GenAppControllerAction">
+			<Params>
+				<Param id="relativePath">controller/app</Param>
+				<Param id="mbPathFile">controller/app/Controller.txt</Param>
 				<Param id="preGenFileName"></Param>
 				<Param id="afterGenFileName">Controller.java</Param>
 			</Params>

@@ -4,8 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import $#commonPackge#.common.service.BaseService;
-
-public interface $#moduleNameSuperCase#Service extends BaseService{
+import $#commonPackge#.$#modulePackge#.model.$#moduleNameSuperCase#Model;
+/**
+ * 
+ * @author liwei
+ *
+ */
+public interface $#moduleNameSuperCase#Service extends BaseService<$#moduleNameSuperCase#Model<String, Object>>{
 
 	
 }

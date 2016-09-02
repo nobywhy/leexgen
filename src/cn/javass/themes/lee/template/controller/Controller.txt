@@ -20,7 +20,11 @@ import $#commonPackge#.common.controller.BaseController;
 import $#commonPackge#.common.pageutil.Page;
 import $#commonPackge#.common.utils.PasswordHelper;
 import $#commonPackge#.common.utils.StringUtil;
-
+/**
+ * 
+ * @author liwei
+ *
+ */
 @Controller
 @RequestMapping("exp/$#moduleName#")
 public class $#moduleNameSuperCase#Controller extends BaseController {

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lee.exp.dao.DictDao">
+<mapper namespace="com.caipai.exp.dao.DictDao">
 
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
 	<insert id="create" parameterType="java.util.HashMap">
 			insert into
-			t_dict(dict_key,dict_value,description,sort,remarks,create_by,create_time,delete_flag,parent_id)
-			values
-			 (#{dict_key},#{dict_value},#{description},#{sort},#{remarks},#{create_by},#{create_time},#{delete_flag},#{parent_id})
+			t_dict (dict_key,dict_value,name,parent_id,icon,description) 
+			values(
+			#{dict_key},#{dict_value},#{name},#{parent_id},#{icon},#{description}
+			)
 	</insert>
 
 	<update id="update" parameterType="java.util.HashMap">
@@ -20,26 +22,17 @@ dict_key=#{dict_key},
 <if test="dict_value!=null &amp;&amp; dict_value!=''">
 dict_value=#{dict_value},
 </if>
-<if test="description!=null &amp;&amp; description!=''">
-description=#{description},
-</if>
-<if test="sort!=null &amp;&amp; sort!=''">
-sort=#{sort},
-</if>
-<if test="remarks!=null &amp;&amp; remarks!=''">
-remarks=#{remarks},
-</if>
-<if test="create_by!=null &amp;&amp; create_by!=''">
-create_by=#{create_by},
-</if>
-<if test="create_time!=null &amp;&amp; create_time!=''">
-create_time=#{create_time},
-</if>
-<if test="delete_flag!=null &amp;&amp; delete_flag!=''">
-delete_flag=#{delete_flag},
+<if test="name!=null &amp;&amp; name!=''">
+name=#{name},
 </if>
 <if test="parent_id!=null &amp;&amp; parent_id!=''">
 parent_id=#{parent_id},
+</if>
+<if test="icon!=null &amp;&amp; icon!=''">
+icon=#{icon},
+</if>
+<if test="description!=null &amp;&amp; description!=''">
+description=#{description},
 </if>
 
 			</set>
@@ -51,9 +44,25 @@ parent_id=#{parent_id},
 			id=#{id}
 	</delete>
 
-	<select id="getById" resultType="java.util.HashMap">
+	<select id="getById" resultType="com.caipai.exp.model.DictModel">
 			select * from t_dict where
 			id=#{id}
+	</select>
+
+
+	<select id="getOne" resultType="com.caipai.exp.model.UserModel" parameterType="java.util.HashMap">
+		select * from t_dict
+		<where>
+				<if test="dict_key!=null &amp;&amp; dict_key!=''">
+and dict_key=#{dict_key}
+</if>
+<if test="parent_id!=null &amp;&amp; parent_id!=''">
+and parent_id=#{parent_id}
+</if>
+
+		</where>
+		order by id desc
+		limit 0,1
 	</select>
 
 	<select id="getByConditionCount" parameterType="java.util.HashMap"
@@ -63,27 +72,6 @@ parent_id=#{parent_id},
 				<if test="dict_key!=null &amp;&amp; dict_key!=''">
 and dict_key=#{dict_key}
 </if>
-<if test="dict_value!=null &amp;&amp; dict_value!=''">
-and dict_value=#{dict_value}
-</if>
-<if test="description!=null &amp;&amp; description!=''">
-and description=#{description}
-</if>
-<if test="sort!=null &amp;&amp; sort!=''">
-and sort=#{sort}
-</if>
-<if test="remarks!=null &amp;&amp; remarks!=''">
-and remarks=#{remarks}
-</if>
-<if test="create_by!=null &amp;&amp; create_by!=''">
-and create_by=#{create_by}
-</if>
-<if test="create_time!=null &amp;&amp; create_time!=''">
-and create_time=#{create_time}
-</if>
-<if test="delete_flag!=null &amp;&amp; delete_flag!=''">
-and delete_flag=#{delete_flag}
-</if>
 <if test="parent_id!=null &amp;&amp; parent_id!=''">
 and parent_id=#{parent_id}
 </if>
@@ -92,32 +80,11 @@ and parent_id=#{parent_id}
 	</select>
 
 	<select id="getByConditionPage" parameterType="java.util.HashMap"
-		resultType="java.util.HashMap">
+		resultType="com.caipai.exp.model.DictModel">
 			select * from t_dict
 			<where>
 				<if test="dict_key!=null &amp;&amp; dict_key!=''">
 and dict_key=#{dict_key}
-</if>
-<if test="dict_value!=null &amp;&amp; dict_value!=''">
-and dict_value=#{dict_value}
-</if>
-<if test="description!=null &amp;&amp; description!=''">
-and description=#{description}
-</if>
-<if test="sort!=null &amp;&amp; sort!=''">
-and sort=#{sort}
-</if>
-<if test="remarks!=null &amp;&amp; remarks!=''">
-and remarks=#{remarks}
-</if>
-<if test="create_by!=null &amp;&amp; create_by!=''">
-and create_by=#{create_by}
-</if>
-<if test="create_time!=null &amp;&amp; create_time!=''">
-and create_time=#{create_time}
-</if>
-<if test="delete_flag!=null &amp;&amp; delete_flag!=''">
-and delete_flag=#{delete_flag}
 </if>
 <if test="parent_id!=null &amp;&amp; parent_id!=''">
 and parent_id=#{parent_id}
@@ -129,32 +96,11 @@ and parent_id=#{parent_id}
 	</select>
 	
 	<select id="getByCondition" parameterType="java.util.HashMap"
-		resultType="java.util.HashMap">
+		resultType="com.caipai.exp.model.DictModel">
 			select * from t_dict
 			<where>
 				<if test="dict_key!=null &amp;&amp; dict_key!=''">
 and dict_key=#{dict_key}
-</if>
-<if test="dict_value!=null &amp;&amp; dict_value!=''">
-and dict_value=#{dict_value}
-</if>
-<if test="description!=null &amp;&amp; description!=''">
-and description=#{description}
-</if>
-<if test="sort!=null &amp;&amp; sort!=''">
-and sort=#{sort}
-</if>
-<if test="remarks!=null &amp;&amp; remarks!=''">
-and remarks=#{remarks}
-</if>
-<if test="create_by!=null &amp;&amp; create_by!=''">
-and create_by=#{create_by}
-</if>
-<if test="create_time!=null &amp;&amp; create_time!=''">
-and create_time=#{create_time}
-</if>
-<if test="delete_flag!=null &amp;&amp; delete_flag!=''">
-and delete_flag=#{delete_flag}
 </if>
 <if test="parent_id!=null &amp;&amp; parent_id!=''">
 and parent_id=#{parent_id}

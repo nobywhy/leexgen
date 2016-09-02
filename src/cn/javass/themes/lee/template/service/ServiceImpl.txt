@@ -15,16 +15,21 @@ import $#commonPackge#.common.dao.BaseDAO;
 import $#commonPackge#.common.service.BaseServiceImpl;
 import $#commonPackge#.$#modulePackge#.dao.$#moduleNameSuperCase#Dao;
 import $#commonPackge#.$#modulePackge#.service.$#moduleNameSuperCase#Service;
-
+import $#commonPackge#.$#modulePackge#.model.$#moduleNameSuperCase#Model;
+/**
+ * 
+ * @author liwei
+ *
+ */
 @Service
-public class $#moduleNameSuperCase#ServiceImpl extends BaseServiceImpl implements $#moduleNameSuperCase#Service {
-	@Autowired
+public class $#moduleNameSuperCase#ServiceImpl extends BaseServiceImpl<$#moduleNameSuperCase#Model<String, Object>> implements $#moduleNameSuperCase#Service {
+	//@Autowired
 	private $#moduleNameSuperCase#Dao dao = null;
 
-	@Override
 	@Resource(name="$#moduleName#Dao")
-	public void setDAO(BaseDAO dao) {
+	public void setDAO($#moduleNameSuperCase#Dao dao) {
 		super.setDAO(dao);
+		this.dao = dao;
 	}
 
 

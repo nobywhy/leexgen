@@ -1,4 +1,4 @@
-package com.lee.exp.controller;
+package com.caipai.exp.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,14 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
-import com.lee.exp.service.DictService;
-import com.lee.annotation.RequiresPermissions;
-import com.lee.annotation.SysLog;
-import com.lee.common.controller.BaseController;
-import com.lee.common.pageutil.Page;
-import com.lee.common.utils.PasswordHelper;
-import com.lee.common.utils.StringUtil;
-
+import com.caipai.exp.service.DictService;
+import com.caipai.annotation.RequiresPermissions;
+import com.caipai.annotation.SysLog;
+import com.caipai.common.controller.BaseController;
+import com.caipai.common.pageutil.Page;
+import com.caipai.common.utils.PasswordHelper;
+import com.caipai.common.utils.StringUtil;
+/**
+ * 
+ * @author liwei
+ *
+ */
 @Controller
 @RequestMapping("exp/dict")
 public class DictController extends BaseController {
@@ -77,10 +81,11 @@ public class DictController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value="delete.do")
 	@SysLog(module="数据字典管理",methods="删除数据字典")
-	public String delete(HttpServletRequest request){
+	public JSONObject delete(HttpServletRequest request){
 		String id = request.getParameter("id");
 		dictService.delete(Integer.parseInt(id));
-		return "success";
+		JSONObject jsonResult = getJsonResult("1000", "message", null);
+		return jsonResult;
 	}
 	
 	

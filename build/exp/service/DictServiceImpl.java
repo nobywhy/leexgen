@@ -1,4 +1,4 @@
-package com.lee.exp.service.impl;
+package com.caipai.exp.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,20 +11,25 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lee.common.dao.BaseDAO;
-import com.lee.common.service.BaseServiceImpl;
-import com.lee.exp.dao.DictDao;
-import com.lee.exp.service.DictService;
-
+import com.caipai.common.dao.BaseDAO;
+import com.caipai.common.service.BaseServiceImpl;
+import com.caipai.exp.dao.DictDao;
+import com.caipai.exp.service.DictService;
+import com.caipai.exp.model.DictModel;
+/**
+ * 
+ * @author liwei
+ *
+ */
 @Service
-public class DictServiceImpl extends BaseServiceImpl implements DictService {
-	@Autowired
+public class DictServiceImpl extends BaseServiceImpl<DictModel<String, Object>> implements DictService {
+	//@Autowired
 	private DictDao dao = null;
 
-	@Override
 	@Resource(name="dictDao")
-	public void setDAO(BaseDAO dao) {
+	public void setDAO(DictDao dao) {
 		super.setDAO(dao);
+		this.dao = dao;
 	}
 
 

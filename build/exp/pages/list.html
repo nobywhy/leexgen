@@ -4,10 +4,10 @@
 	<head>
 		<base id="base" href="${base}">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>数据字典管理</title>
+		<title>直播管理</title>
 		<link href="${base}/static/css/style.css" rel="stylesheet" type="text/css">
 		<link href="${base}/static/css/select.css" rel="stylesheet" type="text/css" />
-		<link href="${base}/static/css/laydate/need/laydate.css" rel="stylesheet" type="text/css" />
+		<link href="${base}/static/lib/laydate/need/laydate.css" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="${base}/static/js/jquery-1.8.2.js"></script>
 		<script type="text/javascript" src="${base}/static/js/pager.js"></script>
@@ -25,14 +25,14 @@
 				frm.submit();
 			}
 			
-			function querydict(id){
-		   		$("#searchfrm").attr("action","${base}/exp/dict/toAdd.do?id="+id);
+			function queryliveroom(id){
+		   		$("#searchfrm").attr("action","${base}/exp/liveroom/toAdd.do?id="+id);
 		   		$("#searchfrm").submit();
 		    }
 			
 			//单条记录删除  
-		   function deletedict(id){
-		   		var url = "${base}/exp/dict/delete.do";
+		   function deleteliveroom(id){
+		   		var url = "${base}/exp/liveroom/delete.do";
 		   		if(id==""){
 		   			alert("删除记录删除的ID获取失败！");
 		   			return false;
@@ -47,7 +47,7 @@
 	            	data:para,
 	            	dataType:"json",
 	            	success:function(msg){
-	            		if(msg == "success"){
+	            		if(msg.code == "1000"){
 		            		window.location.reload()
 	            		}else {
 	            			alert("操作失败");
@@ -99,19 +99,22 @@
 <div class="place">
 		    <span>位置：</span>
 		    <ul class="placeul">
-		    <li><a href="${base}/exp/dict/list.do">数据字典管理</a></li>
+		    <li><a href="${base}/exp/liveroom/list.do">直播管理</a></li>
 		    </ul>
    	 </div>
 	<br>
 	<div style="margin-left:5px;">
-	 <form name="searchfrm" id="searchfrm" action="${base}/exp/dict/list.do" method="post">
+	 <form name="searchfrm" id="searchfrm" action="${base}/exp/liveroom/list.do" method="post">
 		  <div class="searchbar_mid">
 		  <input type="hidden" name="pageIndex" value="${page.pageIndex}">
      			<input type="hidden" name="pageSize" value="${page.pageSize}">
      			<ul class="seachform">
 				    
-				    <li><label>KEY</label><input value="${queryParams.dict_key!''}" name="dict_key" id="dict_key" type="text" class="scinput" /></li>
-<li><label>父级编号</label><input value="${queryParams.parent_id!''}" name="parent_id" id="parent_id" type="text" class="scinput" /></li>
+				    <li><label>财拍ID</label><input value="${queryParams.userid!''}" name="userid" id="userid" type="text" class="scinput" /></li>
+<li><label>聊天室ID</label><input value="${queryParams.roomid!''}" name="roomid" id="roomid" type="text" class="scinput" /></li>
+<li><label>云信ID</label><input value="${queryParams.creator!''}" name="creator" id="creator" type="text" class="scinput" /></li>
+<li><label>聊天室状态</label><input value="${queryParams.valid!''}" name="valid" id="valid" type="text" class="scinput" /></li>
+<li><label>直播频道id</label><input value="${queryParams.cid!''}" name="cid" id="cid" type="text" class="scinput" /></li>
 
 				    
 				    <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="查询"/></li>
@@ -127,7 +130,7 @@
 	<div class="rightinfo">
 		<div class="tools">
 	    	 <ul class="toolbar">
-		        <li class="click"><a href="${base}/exp/dict/toAdd.do"><span><img src="${base}/static/images/t01.png" /></span>添加</a></li>
+		        <li class="click"><a href="${base}/exp/liveroom/toAdd.do"><span><img src="${base}/static/images/t01.png" /></span>添加</a></li>
 	         </ul>
     	</div>
     </div>
@@ -137,13 +140,25 @@
     	<thead>
     	<tr>
     	
-    	<th width="5%">父级编号</th>
-<th width="5%">键</th>
-<th width="5%">值</th>
-<th width="5%">描叙</th>
-<th width="5%">排序</th>
-<th width="5%">备注</th>
+    	<th width="5%">财拍ID</th>
+<th width="5%">聊天室ID</th>
+<th width="5%">云信ID</th>
+<th width="5%">聊天室名</th>
+<th width="5%">状态</th>
+<th width="5%">公告</th>
+<th width="5%">直播地址</th>
+<th width="5%">在线人数</th>
+<th width="5%">总人数</th>
+<th width="5%">图标</th>
+<th width="5%">直播频道ID</th>
+<th width="5%">频道创建时间</th>
+<th width="5%">推流地址</th>
+<th width="5%">http拉流地址</th>
+<th width="5%">hls拉流地址</th>
+<th width="5%">rtmp拉流地址</th>
+<th width="5%">扩展字段</th>
 <th width="5%">创建时间</th>
+<th width="5%">更新时间</th>
 
     	
         <th width="5%">操作</th>
@@ -151,32 +166,44 @@
         </thead>
         
         <#if page??>
-	      <#list page.elements as dict>
+	      <#list page.elements as liveroom>
         <tbody>
          <tr>
          
-         	<td>${dict.parent_id}</td>
-<td>${dict.dict_key}</td>
-<td>${dict.dict_value}</td>
-<td>${dict.description}</td>
-<td>${dict.sort}</td>
-<td>${dict.remarks}</td>
-<td>${dict.create_time}</td>
+         	<td>${liveroom.userid}</td>
+<td>${liveroom.roomid}</td>
+<td>${liveroom.creator}</td>
+<td>${liveroom.name}</td>
+<td>${liveroom.valid}</td>
+<td>${liveroom.announcement}</td>
+<td>${liveroom.broadcasturl}</td>
+<td>${liveroom.onlineusercount}</td>
+<td>${liveroom.totalusercount}</td>
+<td>${liveroom.icon}</td>
+<td>${liveroom.cid}</td>
+<td>${liveroom.ctime}</td>
+<td>${liveroom.pushurl}</td>
+<td>${liveroom.httppullurl}</td>
+<td>${liveroom.hlspullurl}</td>
+<td>${liveroom.rtmppullurl}</td>
+<td>${liveroom.ext}</td>
+<td>${liveroom.create_time}</td>
+<td>${liveroom.update_time}</td>
 
          	
             <td>
               <!--
-              <@hasPermission name="dict_audit">
-              	<a href="javascript:audit('${dict.id}','${dict.accountName}');" onclick="">审核</a> |  
+              <@hasPermission name="liveroom_audit">
+              	<a href="javascript:audit('${liveroom.id}','${liveroom.accountName}');" onclick="">审核</a> |  
               </@hasPermission> 
               -->
               
-              <@hasPermission name="dict_update">
-	          	<a href="javascript:querydict('${dict.id}');" onclick="">编辑</a> |  
+              <@hasPermission name="liveroom_update">
+	          	<a href="javascript:queryliveroom('${liveroom.id}');" onclick="">编辑</a> |  
 	          </@hasPermission> 
 	          
-	          <@hasPermission name="dict_delete">
-			  	<a href="javascript:deletedict(<#if dict.id??>${dict.id}</#if>)">删除</a>
+	          <@hasPermission name="liveroom_delete">
+			  	<a href="javascript:deleteliveroom(<#if liveroom.id??>${liveroom.id}</#if>)">删除</a>
 			  </@hasPermission> 
 	         </td> 
          </tr>

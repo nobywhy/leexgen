@@ -4,7 +4,7 @@
 	<head>
 		<base id="base" href="${base}">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>数据字典管理</title>
+		<title>直播管理</title>
 		<link href="${base}/static/css/style.css" rel="stylesheet" type="text/css">
 		<link href="${base}/static/css/select.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="${base}/static/js/jquery-1.8.2.js"></script>
@@ -21,10 +21,10 @@
 			
 			
 			function sub(){
-				   /* var param = $("#dictform").serialize();
+				   /* var param = $("#liveroomform").serialize();
 				   $.ajax({
 				   		type: "POST",
-					   	url: "dict/add.html",
+					   	url: "liveroom/add.html",
 					   	data: param,
 					   	dataType:"json",
 					   	success: function(msg){
@@ -39,7 +39,7 @@
 					var inputs = $(":input[required='required']");
 					// 不需要校验，直接提交
 					if(inputs==null || inputs.length==0){
-						$("#dictform").submit(); 
+						$("#liveroomform").submit(); 
 						return;
 					}
 					// 需要校验
@@ -53,7 +53,7 @@
 						}
 					});
 					if(pass){
-					   $("#dictform").submit(); 
+					   $("#liveroomform").submit(); 
 					}
 				}
 				 
@@ -63,14 +63,14 @@
 					$("#backFrm").submit();
 				}
 			
-			/* function banks(dict_name){
+			/* function banks(liveroom_name){
 				layer.open({
 			        type: 2,
-			        title: dict_name+'的银行卡',
+			        title: liveroom_name+'的银行卡',
 			        maxmin: true,
 			        shadeClose: true, //点击遮罩关闭层
 			        area : ['1200px' , '800'],
-			        content: 'dictbank!index.htm?dict_name='+dict_name
+			        content: 'liveroombank!index.htm?liveroom_name='+liveroom_name
 			    });
 			} */
 		
@@ -79,7 +79,7 @@
 <body>
 <body>
 
-	<form id="backFrm" action="${base}/exp/dict/list.do" method="post">
+	<form id="backFrm" action="${base}/exp/liveroom/list.do" method="post">
 		<#if queryParams??>
 			<#list queryParams?keys as key>
 				<input type="hidden" name="${key}" value="${queryParams[key]}"/>
@@ -90,29 +90,55 @@
 	<div class="place">
 		    <span>位置：</span>
 		    <ul class="placeul">
-		    <li><a href="${base}/exp/dict/list.do>数据字典管理</a></li>
-		    <li><a href="#"><#if dict??>编辑数据字典<#else>添加数据字典</#if></a></li>
+		    <li><a href="${base}/exp/liveroom/list.do>直播管理</a></li>
+		    <li><a href="#"><#if liveroom??>编辑直播<#else>添加直播</#if></a></li>
 		    </ul>
 		</div>
 		  
 		 <div class="formbody">
 		    
-		    <div class="formtitle"><span><#if dict??>编辑数据字典<#else>添加数据字典</#if></span></div>
-		    <form action="${base}/exp/dict/add.do" name="dictform" id="dictform"  method="post">
-        	<input type="hidden" name="id" id="id" value="${dict.id}"/>
+		    <div class="formtitle"><span><#if liveroom??>编辑直播<#else>添加直播</#if></span></div>
+		    <form action="${base}/exp/liveroom/add.do" name="liveroomform" id="liveroomform"  method="post">
+        	<input type="hidden" name="id" id="id" value="${liveroom.id}"/>
 		    <ul class="forminfo">
 		    
-		     <li><label>键:</label><input id="dict_key" name="dict_key" type="text" class="dfinput" value="${dict.dict_key}" /></li>
+		     <li><label>财拍ID:</label><input id="userid" name="userid" type="text" class="dfinput" value="${liveroom.userid}" /></li>
 
-<li><label>值:</label><input id="dict_value" name="dict_value" type="text" class="dfinput" value="${dict.dict_value}" /></li>
+<li><label>聊天室ID:</label><input id="roomid" name="roomid" type="text" class="dfinput" value="${liveroom.roomid}" /></li>
 
-<li><label>描叙:</label><input id="description" name="description" type="text" class="dfinput" value="${dict.description}" /></li>
+<li><label>云信ID:</label><input id="creator" name="creator" type="text" class="dfinput" value="${liveroom.creator}" /></li>
 
-<li><label>父级编号:</label><input id="parent_id" name="parent_id" type="text" class="dfinput" value="${dict.parent_id}" /></li>
+<li><label>聊天室名:</label><input id="name" name="name" type="text" class="dfinput" value="${liveroom.name}" /></li>
 
-<li><label>排序:</label><input id="sort" name="sort" type="text" class="dfinput" value="${dict.sort}" /></li>
+<li><label>状态:</label><input id="valid" name="valid" type="text" class="dfinput" value="${liveroom.valid}" /></li>
 
-<li><label>备注:</label><input id="remarks" name="remarks" type="text" class="dfinput" value="${dict.remarks}" /></li>
+<li><label>公告:</label><input id="announcement" name="announcement" type="text" class="dfinput" value="${liveroom.announcement}" /></li>
+
+<li><label>直播地址:</label><input id="broadcasturl" name="broadcasturl" type="text" class="dfinput" value="${liveroom.broadcasturl}" /></li>
+
+<li><label>在线人数:</label><input id="onlineusercount" name="onlineusercount" type="text" class="dfinput" value="${liveroom.onlineusercount}" /></li>
+
+<li><label>总人数:</label><input id="totalusercount" name="totalusercount" type="text" class="dfinput" value="${liveroom.totalusercount}" /></li>
+
+<li><label>图标:</label><input id="icon" name="icon" type="text" class="dfinput" value="${liveroom.icon}" /></li>
+
+<li><label>直播频道ID:</label><input id="cid" name="cid" type="text" class="dfinput" value="${liveroom.cid}" /></li>
+
+<li><label>频道创建时间:</label><input id="ctime" name="ctime" type="text" class="dfinput" value="${liveroom.ctime}" /></li>
+
+<li><label>推流地址:</label><input id="pushurl" name="pushurl" type="text" class="dfinput" value="${liveroom.pushurl}" /></li>
+
+<li><label>http拉流地址:</label><input id="httppullurl" name="httppullurl" type="text" class="dfinput" value="${liveroom.httppullurl}" /></li>
+
+<li><label>hls拉流地址:</label><input id="hlspullurl" name="hlspullurl" type="text" class="dfinput" value="${liveroom.hlspullurl}" /></li>
+
+<li><label>rtmp拉流地址:</label><input id="rtmppullurl" name="rtmppullurl" type="text" class="dfinput" value="${liveroom.rtmppullurl}" /></li>
+
+<li><label>扩展字段:</label><input id="ext" name="ext" type="text" class="dfinput" value="${liveroom.ext}" /></li>
+
+<li><label>创建时间:</label><input id="create_time" name="create_time" type="text" class="dfinput" value="${liveroom.create_time}" /></li>
+
+<li><label>更新时间:</label><input id="update_time" name="update_time" type="text" class="dfinput" value="${liveroom.update_time}" /></li>
 
 
 		     
